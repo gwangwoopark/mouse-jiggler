@@ -29,7 +29,7 @@ body {
    ==================== */
 .header {
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .header-top {
@@ -73,7 +73,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px 0;
+  margin: 15px 0;
 }
 
 /* ====================
@@ -139,8 +139,8 @@ body {
    WebGL Container
    ==================== */
 #webgl-container {
-  width: 350px;
-  height: 350px;
+  width: 280px;
+  height: 280px;
   border: 2px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -152,12 +152,22 @@ body {
    Controls
    ==================== */
 .controls {
+  margin-bottom: 12px;
+}
+
+.control-row {
   display: flex;
   gap: 20px;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  margin-bottom: 15px;
   flex-wrap: wrap;
+}
+
+.control-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
 }
 
 .control-group {
@@ -173,6 +183,46 @@ body {
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  min-width: 45px;
+  text-align: left;
+}
+
+.radio-group {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  padding: 4px 8px;
+  transition: all 0.3s ease;
+  font-size: 11px;
+}
+
+.radio-option:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.radio-option input[type="radio"] {
+  margin: 0 6px 0 0;
+  accent-color: #4facfe;
+}
+
+.radio-option input[type="radio"]:checked + .radio-text {
+  color: #4facfe;
+  font-weight: bold;
+}
+
+.radio-text {
+  color: #fff;
+  font-size: 12px;
 }
 
 .select-container {
@@ -212,11 +262,20 @@ option {
    ==================== */
 .progress-container {
   width: 100%;
-  max-width: 350px;
+  max-width: 280px;
   margin: 15px auto 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.progress-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ccc;
+  font-size: 12px;
 }
 
 .progress-label {
@@ -230,7 +289,7 @@ option {
 }
 
 .progress-bar {
-  width: 100%;
+  flex: 1;
   height: 20px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 10px;
@@ -292,10 +351,18 @@ option {
 .status-indicator {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   color: #ccc;
   font-size: 11px;
-  margin-top: 10px;
+  white-space: nowrap;
+  min-width: 80px;
+}
+
+#progressTime {
+  font-size: 11px;
+  color: #ccc;
+  min-width: 30px;
+  text-align: right;
 }
 
 .status-dot {
@@ -458,7 +525,7 @@ option {
   }
 
   .title {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .instructions {
@@ -467,17 +534,49 @@ option {
   }
 
   #webgl-container {
-    width: 300px;
-    height: 300px;
+    width: 250px;
+    height: 250px;
   }
 
   .progress-container {
-    max-width: 300px;
+    max-width: 250px;
     margin: 10px auto 0;
   }
   
+  .progress-row {
+    gap: 6px;
+    font-size: 11px;
+  }
+  
+  .status-indicator {
+    font-size: 10px;
+    min-width: 70px;
+    gap: 4px;
+  }
+  
+  #progressTime {
+    font-size: 10px;
+    min-width: 25px;
+  }
+  
   .header {
-    margin-top: 20px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+  
+  .header-top {
+    margin-bottom: 8px;
+  }
+  
+  .instructions {
+    margin-bottom: 8px;
+  }
+  
+  .wake-lock-info {
+    margin-bottom: 6px;
+  }
+  
+  .controls {
     margin-bottom: 8px;
   }
   
@@ -500,6 +599,27 @@ option {
     font-size: 11px;
     padding: 5px 10px;
     min-width: 35px;
+  }
+  
+  /* 모바일 컨트롤 조정 */
+  .control-row {
+    gap: 12px;
+  }
+  
+  .control-section {
+    gap: 4px;
+    flex-direction: row;
+  }
+  
+  .control-label {
+    font-size: 10px;
+    min-width: 35px;
+  }
+  
+  select {
+    padding: 6px 8px;
+    font-size: 11px;
+    min-width: 70px;
   }
   
   /* 모바일 광고 조정 */
