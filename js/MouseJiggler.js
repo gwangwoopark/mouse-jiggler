@@ -177,8 +177,8 @@ class MouseJiggler {
         this.timingManager.clearTimers();
         this.animationController.stopAnimation();
         this.animationController.unlockDirection(); // 방향 고정 해제
-        this.updateStatus('중지됨', false);
-        this.updateProgress(0, '중지됨', '0:00');
+        this.updateStatus('stoppedStatus', false);
+        this.updateProgress(0, 'stoppedStatus', '0:00');
         
         // 사용자가 직접 중지한 경우에만 카메라 위치 초기화
         this.resetCameraPosition();

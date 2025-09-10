@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>서비스 소개 - Mouse Jiggler</title>
+    <link rel="stylesheet" href="css/policy.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>서비스 소개</h1>
+        <div class="language-selector">
+          <button id="langBtn" class="lang-btn" onclick="toggleLanguage()">EN</button>
+        </div>
+      </header>
+
+      <div class="content" id="content-ko">
+        <section>
+          <h2>Mouse Jiggler란?</h2>
+          <p>Mouse Jiggler는 마우스를 자동으로 움직여서 컴퓨터의 화면 절전 모드와 화면 보호기를 방지하는 무료 웹 서비스입니다. 별도의 소프트웨어 설치나 회원가입 없이 웹 브라우저에서 바로 사용할 수 있습니다.</p>
+        </section>
+
+        <section>
+          <h2>주요 기능</h2>
+          <ul>
+            <li><strong>자동 마우스 움직임</strong>: 설정된 간격에 따라 자동으로 마우스를 움직입니다</li>
+            <li><strong>속도 조절</strong>: 느림, 보통, 빠름, 초고속 중 선택 가능</li>
+            <li><strong>간격 설정</strong>: 10초, 30초 간격 또는 연속 모드 지원</li>
+            <li><strong>Wake Lock API</strong>: 지원하는 브라우저에서 화면 절전 방지</li>
+            <li><strong>다국어 지원</strong>: 한국어/영어 언어 전환</li>
+            <li><strong>반응형 디자인</strong>: 데스크톱과 모바일에서 모두 사용 가능</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>사용 시나리오</h2>
+          <ul>
+            <li>📺 <strong>동영상 시청</strong>: 긴 동영상을 시청할 때 화면이 꺼지는 것을 방지</li>
+            <li>💼 <strong>재택근무</strong>: 잠시 자리를 비울 때 컴퓨터가 잠기지 않도록</li>
+            <li>📊 <strong>프레젠테이션</strong>: 발표 중 화면 보호기가 실행되지 않도록</li>
+            <li>⏰ <strong>장시간 작업</strong>: 긴 작업 중 화면이 꺼져서 작업이 중단되는 것을 방지</li>
+            <li>🎮 <strong>게임/앱 실행</strong>: 게임이나 앱이 백그라운드로 전환되지 않도록</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>기술적 특징</h2>
+          <ul>
+            <li><strong>클라이언트 사이드</strong>: 모든 처리가 사용자 브라우저에서 실행</li>
+            <li><strong>개인정보 보호</strong>: 어떠한 개인정보도 수집하지 않음</li>
+            <li><strong>WebGL 렌더링</strong>: Three.js를 사용한 부드러운 3D 애니메이션</li>
+            <li><strong>PWA 호환</strong>: 모바일에서 앱처럼 사용 가능</li>
+            <li><strong>HTTPS 보안</strong>: 안전한 연결을 통한 서비스 제공</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>브라우저 호환성</h2>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+            <div>
+              <h3>✅ 완전 지원</h3>
+              <ul>
+                <li>Chrome (권장)</li>
+                <li>Microsoft Edge (권장)</li>
+                <li>Firefox</li>
+                <li>Safari</li>
+              </ul>
+            </div>
+            <div>
+              <h3>⚠️ 부분 지원</h3>
+              <ul>
+                <li>구형 브라우저</li>
+                <li>일부 모바일 브라우저</li>
+                <li>Wake Lock API 미지원 브라우저</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>개발 목표</h2>
+          <p>Mouse Jiggler는 다음과 같은 가치를 추구합니다:</p>
+          <ul>
+            <li><strong>단순함</strong>: 복잡한 설정 없이 바로 사용 가능</li>
+            <li><strong>접근성</strong>: 모든 사용자가 쉽게 접근할 수 있도록</li>
+            <li><strong>프라이버시</strong>: 사용자의 개인정보를 보호</li>
+            <li><strong>효율성</strong>: 최소한의 리소스로 최대 효과</li>
+            <li><strong>신뢰성</strong>: 안정적이고 예측 가능한 동작</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>문의 및 피드백</h2>
+          <p>서비스 개선을 위한 여러분의 의견을 기다립니다:</p>
+          <ul>
+            <li>📧 이메일: contact@wake.nyfi.app</li>
+            <li>🌐 웹사이트: wake.nyfi.app</li>
+            <li>🔧 기술 지원: 브라우저 호환성 및 기능 관련 문의</li>
+            <li>💡 기능 요청: 새로운 기능에 대한 제안</li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="content" id="content-en" style="display: none;">
+        <section>
+          <h2>What is Mouse Jiggler?</h2>
+          <p>Mouse Jiggler is a free web service that automatically moves your mouse to prevent your computer's screen sleep mode and screensaver. It can be used directly in your web browser without installing any software or registering an account.</p>
+        </section>
+
+        <section>
+          <h2>Key Features</h2>
+          <ul>
+            <li><strong>Automatic Mouse Movement</strong>: Automatically moves mouse at set intervals</li>
+            <li><strong>Speed Control</strong>: Choose from Slow, Normal, Fast, Ultra Fast</li>
+            <li><strong>Interval Settings</strong>: 10 second, 30 second intervals or continuous mode</li>
+            <li><strong>Wake Lock API</strong>: Prevents screen sleep on supported browsers</li>
+            <li><strong>Multi-language Support</strong>: Korean/English language switching</li>
+            <li><strong>Responsive Design</strong>: Works on both desktop and mobile</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Use Cases</h2>
+          <ul>
+            <li>📺 <strong>Video Watching</strong>: Prevent screen from turning off during long videos</li>
+            <li>💼 <strong>Remote Work</strong>: Keep computer unlocked when stepping away briefly</li>
+            <li>📊 <strong>Presentations</strong>: Prevent screensaver during presentations</li>
+            <li>⏰ <strong>Long Tasks</strong>: Prevent work interruption from screen turning off</li>
+            <li>🎮 <strong>Games/Apps</strong>: Keep games or apps from going to background</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Technical Features</h2>
+          <ul>
+            <li><strong>Client-Side</strong>: All processing runs in user's browser</li>
+            <li><strong>Privacy Protection</strong>: No personal information collected</li>
+            <li><strong>WebGL Rendering</strong>: Smooth 3D animations using Three.js</li>
+            <li><strong>PWA Compatible</strong>: Can be used like an app on mobile</li>
+            <li><strong>HTTPS Security</strong>: Secure service delivery</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Browser Compatibility</h2>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+            <div>
+              <h3>✅ Full Support</h3>
+              <ul>
+                <li>Chrome (Recommended)</li>
+                <li>Microsoft Edge (Recommended)</li>
+                <li>Firefox</li>
+                <li>Safari</li>
+              </ul>
+            </div>
+            <div>
+              <h3>⚠️ Partial Support</h3>
+              <ul>
+                <li>Older browsers</li>
+                <li>Some mobile browsers</li>
+                <li>Browsers without Wake Lock API</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Development Goals</h2>
+          <p>Mouse Jiggler pursues the following values:</p>
+          <ul>
+            <li><strong>Simplicity</strong>: Ready to use without complex setup</li>
+            <li><strong>Accessibility</strong>: Easy access for all users</li>
+            <li><strong>Privacy</strong>: Protecting user privacy</li>
+            <li><strong>Efficiency</strong>: Maximum effect with minimal resources</li>
+            <li><strong>Reliability</strong>: Stable and predictable behavior</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Contact & Feedback</h2>
+          <p>We welcome your feedback for service improvement:</p>
+          <ul>
+            <li>📧 Email: contact@wake.nyfi.app</li>
+            <li>🌐 Website: wake.nyfi.app</li>
+            <li>🔧 Technical Support: Browser compatibility and feature inquiries</li>
+            <li>💡 Feature Requests: Suggestions for new features</li>
+          </ul>
+        </section>
+      </div>
+
+      <footer>
+        <a href="/" class="back-link">← Mouse Jiggler로 돌아가기 / ← Back to Mouse Jiggler</a>
+      </footer>
+    </div>
+
+    <script>
+      // URL 파라미터에서 언어 확인, 기본값은 영어
+      const urlParams = new URLSearchParams(window.location.search);
+      let currentLang = urlParams.get('lang') || 'en';
+      
+      // 지원하지 않는 언어인 경우 영어로 설정
+      if (!['ko', 'en'].includes(currentLang)) {
+        currentLang = 'en';
+      }
+      
+      // 페이지 로드 시 초기 언어 설정
+      document.addEventListener('DOMContentLoaded', () => {
+        updateDisplay();
+      });
+      
+      function toggleLanguage() {
+        currentLang = currentLang === 'ko' ? 'en' : 'ko';
+        updateDisplay();
+        
+        // URL 업데이트 (페이지 새로고침 없이)
+        const newUrl = new URL(window.location);
+        newUrl.searchParams.set('lang', currentLang);
+        window.history.replaceState({}, '', newUrl);
+      }
+      
+      function updateDisplay() {
+        const koContent = document.getElementById('content-ko');
+        const enContent = document.getElementById('content-en');
+        const langBtn = document.getElementById('langBtn');
+        
+        if (currentLang === 'en') {
+          koContent.style.display = 'none';
+          enContent.style.display = 'block';
+          langBtn.textContent = '한글';
+          document.documentElement.lang = 'en';
+          document.title = 'About - Mouse Jiggler';
+        } else {
+          koContent.style.display = 'block';
+          enContent.style.display = 'none';
+          langBtn.textContent = 'EN';
+          document.documentElement.lang = 'ko';
+          document.title = '서비스 소개 - Mouse Jiggler';
+        }
+      }
+    </script>
+  </body>
+</html>
