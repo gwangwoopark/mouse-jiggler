@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Favicon Converter</title>
+</head>
+<body>
+    <h2>Favicon Generator</h2>
+    <canvas id="faviconCanvas" width="32" height="32"></canvas>
+    <br><br>
+    <button onclick="downloadFavicon()">Download favicon.ico</button>
+    
+    <script>
+        const canvas = document.getElementById('faviconCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Draw favicon
+        // Background circle
+        ctx.fillStyle = '#4facfe';
+        ctx.beginPath();
+        ctx.arc(16, 16, 14, 0, 2 * Math.PI);
+        ctx.fill();
+        
+        // Mouse body
+        ctx.fillStyle = '#ffffff';
+        ctx.strokeStyle = '#333333';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.ellipse(16, 18, 5, 8, 0, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        
+        // Mouse scroll wheel
+        ctx.fillStyle = '#666666';
+        ctx.fillRect(15, 13, 2, 4);
+        
+        // Movement dots
+        ctx.fillStyle = '#ffeb3b';
+        ctx.beginPath();
+        ctx.arc(10, 10, 2, 0, 2 * Math.PI);
+        ctx.fill();
+        
+        ctx.beginPath();
+        ctx.arc(22, 22, 2, 0, 2 * Math.PI);
+        ctx.fill();
+        
+        function downloadFavicon() {
+            canvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'favicon.ico';
+                a.click();
+                URL.revokeObjectURL(url);
+            });
+        }
+        
+        // Auto download
+        setTimeout(downloadFavicon, 1000);
+    </script>
+</body>
+</html>

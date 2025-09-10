@@ -24,6 +24,7 @@ class LanguageManager {
         stoppedStatus: '중지됨',
         continuousMode: '연속 모드',
         aboutLink: '서비스 소개',
+        faqLink: '자주 묻는 질문',
         privacyLink: '개인정보처리방침',
         termsLink: '이용약관',
         copyright: '© 2025 Mouse Jiggler. 무료로 제공되는 서비스입니다.'
@@ -50,6 +51,7 @@ class LanguageManager {
         stoppedStatus: 'Stopped',
         continuousMode: 'Continuous Mode',
         aboutLink: 'About',
+        faqLink: 'FAQ',
         privacyLink: 'Privacy Policy',
         termsLink: 'Terms of Service',
         copyright: '© 2025 Mouse Jiggler. Free service provided.'
