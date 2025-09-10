@@ -77,6 +77,30 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
+    <!-- Wake Lock 다이얼로그 -->
+    <div id="wakeLockDialog" class="wake-lock-dialog">
+      <div class="dialog-overlay"></div>
+      <div class="dialog-content">
+        <div class="dialog-header">
+          <h3 data-translate="wakeLockDialogTitle">화면 절전 방지</h3>
+        </div>
+        <div class="dialog-body">
+          <p data-translate="wakeLockDialogMessage">
+            화면이 꺼지지 않도록 절전 방지 기능을 활성화하시겠습니까?<br>
+            마우스 지글러가 더 효과적으로 작동합니다.
+          </p>
+        </div>
+        <div class="dialog-actions">
+          <button id="wakeLockAllow" class="dialog-btn primary" data-translate="wakeLockAllow">
+            활성화
+          </button>
+          <button id="wakeLockSkip" class="dialog-btn secondary" data-translate="wakeLockSkip">
+            나중에
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- 상단 광고 -->
     <div class="ad-container ad-top">
       <ins class="adsbygoogle"
@@ -90,46 +114,41 @@
     <!-- 헤더 영역 -->
     <div class="header">
       <div class="header-top">
-        <div class="title" data-translate="title">Mouse Jiggler</div>
-        <div class="language-selector">
+        <div class="title clickable-title" data-translate="title" onclick="location.reload()" title="클릭하여 새로고침">Mouse Jiggler</div>
+        <div class="header-controls">
+          <div class="wake-lock-indicator">
+            <span id="wakeLockIndicator" class="wake-lock-status-indicator" data-translate="wakeLockInactive">비활성</span>
+          </div>
           <button id="langBtn" class="lang-btn">EN</button>
         </div>
       </div>
       <div class="instructions" data-translate="instructions">마우스를 아래 격자 영역에 올려놓으세요.</div>
-      <div class="wake-lock-info" id="wakeLockInfo" data-translate="wakeLockInfo">
+      
+      <div class="wake-lock-info" id="wakeLockInfo" data-translate="wakeLockInfo" style="display: none;">
         💡 일부 브라우저에서는 화면 절전 방지가 지원되지 않습니다. Chrome/Edge 사용을 권장합니다.
-        <button class="refresh-btn" id="refreshBtn" onclick="location.reload()">🔄</button>
       </div>
 
-      <!-- 설정 컨트롤 -->
-      <div class="controls">
-        <div class="control-row">
-          <div class="control-section">
-            <div class="control-label" data-translate="speed">속도</div>
-            <select id="speedSelect">
-              <option value="slow" data-translate="slow">느림</option>
-              <option value="normal" selected data-translate="normal">보통</option>
-              <option value="fast" data-translate="fast">빠름</option>
-            </select>
-          </div>
-          
-          <div class="control-section">
-            <div class="control-label" data-translate="interval">간격</div>
-            <select id="intervalSelect">
-              <option value="10">10s</option>
-              <option value="30" selected>30s</option>
-              <option value="continuous">∞</option>
-            </select>
-          </div>
+      <!-- 설정 컨트롤과 프로그레스바 통합 -->
+      <div class="controls-progress">
+        <div class="control-section">
+          <div class="control-label" data-translate="speed">속도</div>
+          <select id="speedSelect">
+            <option value="slow" data-translate="slow">느림</option>
+            <option value="normal" selected data-translate="normal">보통</option>
+            <option value="fast" data-translate="fast">빠름</option>
+          </select>
         </div>
-      </div>
+        
+        <div class="control-section">
+          <div class="control-label" data-translate="interval">간격</div>
+          <select id="intervalSelect">
+            <option value="10">10s</option>
+            <option value="30" selected>30s</option>
+            <option value="continuous">∞</option>
+          </select>
+        </div>
 
-      <div class="progress-container">
-        <div class="progress-row">
-          <div class="status-indicator">
-            <div class="status-dot" id="statusDot"></div>
-            <span id="statusText" data-translate="waiting">대기 중...</span>
-          </div>
+        <div class="progress-section">
           <div class="progress-bar">
             <div class="progress-zones" id="progressZones"></div>
             <div class="progress-fill" id="progressFill"></div>
@@ -190,6 +209,11 @@
         jiggler.init(); // 컴포넌트 초기화
         jiggler.start(); // 자동 시작
         
+        // Wake Lock 다이얼로그 표시 (약간 지연)
+        setTimeout(() => {
+          jiggler.uiController.showWakeLockDialog();
+        }, 1000);
+        
         // 언어 전환 버튼 이벤트 리스너
         const langBtn = document.getElementById('langBtn');
         if (langBtn) {
@@ -197,6 +221,7 @@
             window.languageManager.switchLanguage();
           });
         }
+        
         
         // Service Worker 등록 (PWA 지원)
         if ('serviceWorker' in navigator) {

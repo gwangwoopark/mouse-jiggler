@@ -26,7 +26,13 @@ class LanguageManager {
         faqLink: '자주 묻는 질문',
         privacyLink: '개인정보처리방침',
         termsLink: '이용약관',
-        copyright: '© 2025 Mouse Jiggler. 무료로 제공되는 서비스입니다.'
+        copyright: '© 2025 Mouse Jiggler. 무료로 제공되는 서비스입니다.',
+        wakeLockDialogTitle: '화면 절전 방지',
+        wakeLockDialogMessage: '화면이 꺼지지 않도록 절전 방지 기능을 활성화하시겠습니까? 마우스 지글러가 더 효과적으로 작동합니다.',
+        wakeLockAllow: '활성화',
+        wakeLockSkip: '나중에',
+        wakeLockActive: '활성',
+        wakeLockInactive: '비활성'
       },
       en: {
         title: 'Mouse Jiggler',
@@ -52,7 +58,13 @@ class LanguageManager {
         faqLink: 'FAQ',
         privacyLink: 'Privacy Policy',
         termsLink: 'Terms of Service',
-        copyright: '© 2025 Mouse Jiggler. Free service provided.'
+        copyright: '© 2025 Mouse Jiggler. Free service provided.',
+        wakeLockDialogTitle: 'Screen Wake Lock',
+        wakeLockDialogMessage: 'Would you like to enable screen wake lock to prevent your screen from turning off? This will make Mouse Jiggler more effective.',
+        wakeLockAllow: 'Enable',
+        wakeLockSkip: 'Skip',
+        wakeLockActive: 'Active',
+        wakeLockInactive: 'Inactive'
       }
     };
     

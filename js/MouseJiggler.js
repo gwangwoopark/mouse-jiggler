@@ -148,7 +148,6 @@ class MouseJiggler {
         if (this.isRunning) return;
         
         this.isRunning = true;
-        await this.uiController.requestWakeLock();
         
         this.animationController.updateSpeedSettings();
         this.timingManager.startProgressTracking();

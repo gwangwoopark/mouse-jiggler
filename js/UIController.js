@@ -5,6 +5,7 @@
 class UIController {
     constructor(mouseJiggler) {
         this.mouseJiggler = mouseJiggler;
+        this.wakeLockActive = false;
         this.initControls();
     }
 
@@ -18,6 +19,7 @@ class UIController {
             speedSelect.addEventListener('change', (e) => {
                 this.mouseJiggler.currentSpeed = e.target.value;
                 console.log('Speed changed to:', e.target.value);
+                
                 
                 // 실행 중이면 설정 업데이트
                 if (this.mouseJiggler.isRunning) {
@@ -38,6 +40,7 @@ class UIController {
                 }
                 console.log('Interval changed to:', this.mouseJiggler.currentInterval);
                 
+                
                 // 실행 중이면 완전히 중지 후 새로 시작
                 if (this.mouseJiggler.isRunning) {
                     this.mouseJiggler.stop();
@@ -47,25 +50,16 @@ class UIController {
                 }
             });
         }
+
+        // Wake Lock 다이얼로그 이벤트
+        this.initWakeLockDialog();
     }
 
     /**
-     * 상태 업데이트
+     * 상태 업데이트 (더 이상 사용하지 않음)
      */
     updateStatus(textKey, active = false) {
-        const statusText = document.getElementById('statusText');
-        const statusDot = document.getElementById('statusDot');
-        
-        if (statusText) {
-            // 번역 키인 경우 번역된 텍스트 사용, 아닌 경우 원본 텍스트 사용
-            const translatedText = window.languageManager ? 
-                window.languageManager.getText(textKey) || textKey : textKey;
-            statusText.textContent = translatedText;
-        }
-        
-        if (statusDot) {
-            statusDot.className = active ? 'status-dot active' : 'status-dot waiting';
-        }
+        // 상태 표시 제거됨
     }
 
     /**
@@ -130,12 +124,19 @@ class UIController {
             this.mouseJiggler.wakeLock = await navigator.wakeLock.request('screen');
             console.log('✅ Screen Wake Lock acquired successfully');
             
+            // Wake Lock 상태 업데이트
+            this.wakeLockActive = true;
+            this.updateWakeLockIndicator();
+            
             // 성공 시 경고 메시지 숨기기
             this.hideFallbackMessage();
             
             // Wake Lock이 해제되었을 때의 처리
             this.mouseJiggler.wakeLock.addEventListener('release', () => {
                 console.log('⚠️ Wake Lock released');
+                this.wakeLockActive = false;
+                this.updateWakeLockIndicator();
+                
                 if (this.mouseJiggler.isRunning) {
                     console.log('🔄 Attempting to reacquire Wake Lock...');
                     setTimeout(() => this.requestWakeLock(), 1000);
@@ -236,7 +237,79 @@ ${errorMessage ? `\n상세 오류: ${errorMessage}` : ''}
         if (this.mouseJiggler.wakeLock) {
             this.mouseJiggler.wakeLock.release();
             this.mouseJiggler.wakeLock = null;
+            this.wakeLockActive = false;
+            this.updateWakeLockIndicator();
             console.log('Screen Wake Lock released');
+        }
+    }
+
+    /**
+     * Wake Lock 다이얼로그 초기화
+     */
+    initWakeLockDialog() {
+        const wakeLockAllow = document.getElementById('wakeLockAllow');
+        const wakeLockSkip = document.getElementById('wakeLockSkip');
+        const wakeLockDialog = document.getElementById('wakeLockDialog');
+
+        if (wakeLockAllow) {
+            wakeLockAllow.addEventListener('click', async () => {
+                this.hideWakeLockDialog();
+                await this.requestWakeLock();
+            });
+        }
+
+        if (wakeLockSkip) {
+            wakeLockSkip.addEventListener('click', () => {
+                this.hideWakeLockDialog();
+            });
+        }
+
+        // 다이얼로그 배경 클릭 시 닫기
+        if (wakeLockDialog) {
+            wakeLockDialog.addEventListener('click', (e) => {
+                if (e.target.classList.contains('dialog-overlay')) {
+                    this.hideWakeLockDialog();
+                }
+            });
+        }
+    }
+
+    /**
+     * Wake Lock 다이얼로그 표시
+     */
+    showWakeLockDialog() {
+        const wakeLockDialog = document.getElementById('wakeLockDialog');
+        if (wakeLockDialog) {
+            wakeLockDialog.classList.add('show');
+        }
+    }
+
+    /**
+     * Wake Lock 다이얼로그 숨기기
+     */
+    hideWakeLockDialog() {
+        const wakeLockDialog = document.getElementById('wakeLockDialog');
+        if (wakeLockDialog) {
+            wakeLockDialog.classList.remove('show');
+        }
+    }
+
+    /**
+     * Wake Lock 상태 표시 업데이트
+     */
+    updateWakeLockIndicator() {
+        const wakeLockIndicator = document.getElementById('wakeLockIndicator');
+        
+        if (wakeLockIndicator) {
+            if (this.wakeLockActive) {
+                wakeLockIndicator.className = 'wake-lock-status-indicator active';
+                wakeLockIndicator.setAttribute('data-translate', 'wakeLockActive');
+                wakeLockIndicator.textContent = window.languageManager?.getText('wakeLockActive') || 'Active';
+            } else {
+                wakeLockIndicator.className = 'wake-lock-status-indicator';
+                wakeLockIndicator.setAttribute('data-translate', 'wakeLockInactive');
+                wakeLockIndicator.textContent = window.languageManager?.getText('wakeLockInactive') || 'Inactive';
+            }
         }
     }
 
