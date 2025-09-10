@@ -39,9 +39,31 @@ body {
   margin-bottom: 16px;
 }
 
-.language-selector {
+.header-controls {
   display: flex;
   align-items: center;
+  gap: 8px;
+}
+
+.wake-lock-indicator {
+  display: flex;
+  align-items: center;
+}
+
+.wake-lock-status-indicator {
+  font-size: 10px;
+  color: #999;
+  padding: 2px 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  white-space: nowrap;
+}
+
+.wake-lock-status-indicator.active {
+  color: #4caf50;
+  border-color: rgba(76, 175, 80, 0.3);
+  background: rgba(76, 175, 80, 0.1);
 }
 
 .lang-btn {
@@ -85,6 +107,21 @@ body {
   font-weight: bold;
 }
 
+.clickable-title {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.clickable-title:hover {
+  color: #4facfe;
+  transform: scale(1.02);
+}
+
+.clickable-title:active {
+  transform: scale(0.98);
+}
+
 .instructions {
   color: #ccc;
   font-size: 12px;
@@ -109,6 +146,107 @@ body {
 
 .wake-lock-info.show {
   display: block;
+}
+
+/* ====================
+   Wake Lock Dialog
+   ==================== */
+.wake-lock-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.wake-lock-dialog.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.dialog-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+}
+
+.dialog-content {
+  position: relative;
+  background: rgba(20, 20, 20, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+}
+
+.dialog-header h3 {
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 0 16px 0;
+  text-align: center;
+}
+
+.dialog-body p {
+  color: #ccc;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0 0 24px 0;
+  text-align: center;
+}
+
+.dialog-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.dialog-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s ease;
+  min-width: 100px;
+}
+
+.dialog-btn.primary {
+  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  color: #fff;
+}
+
+.dialog-btn.primary:hover {
+  background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%);
+  transform: translateY(-1px);
+}
+
+.dialog-btn.secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ccc;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dialog-btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .refresh-btn {
@@ -151,16 +289,21 @@ body {
 /* ====================
    Controls
    ==================== */
-.controls {
+.controls-progress {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 12px;
+  flex-wrap: wrap;
 }
 
-.control-row {
+.progress-section {
   display: flex;
-  gap: 20px;
-  align-items: flex-start;
-  justify-content: center;
-  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 150px;
 }
 
 .control-section {
@@ -233,7 +376,7 @@ select {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.3);
   color: #fff;
-  padding: 8px 12px;
+  padding: 2px 8px;
   border-radius: 5px;
   font-size: 14px;
   cursor: pointer;
@@ -260,42 +403,16 @@ option {
 /* ====================
    Progress Bar
    ==================== */
-.progress-container {
-  width: 100%;
-  max-width: 280px;
-  margin: 15px auto 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.progress-row {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #ccc;
-  font-size: 12px;
-}
-
-.progress-label {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: #ccc;
-  font-size: 12px;
-  margin-bottom: 8px;
-}
 
 .progress-bar {
-  flex: 1;
-  height: 20px;
+  height: 14px;
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  border-radius: 7px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.2);
   position: relative;
+  min-width: 120px;
+  flex: 1;
 }
 
 .progress-zones {
@@ -328,7 +445,7 @@ option {
 .progress-fill {
   height: 100%;
   background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-  border-radius: 10px;
+  border-radius: 7px;
   width: 0%;
   transition: width 0.1s ease;
   position: relative;
@@ -345,41 +462,14 @@ option {
   animation: progressGlowWaiting 2s ease-in-out infinite;
 }
 
-/* ====================
-   Status Indicator
-   ==================== */
-.status-indicator {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: #ccc;
-  font-size: 11px;
-  white-space: nowrap;
-  min-width: 80px;
-}
-
 #progressTime {
   font-size: 11px;
   color: #ccc;
   min-width: 30px;
   text-align: right;
+  white-space: nowrap;
 }
 
-.status-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #666;
-}
-
-.status-dot.active {
-  background: #4facfe;
-  animation: pulse 1.5s infinite;
-}
-
-.status-dot.waiting {
-  background: #999;
-}
 
 /* ====================
    Animations
@@ -576,8 +666,23 @@ option {
     margin-bottom: 6px;
   }
   
-  .controls {
+  .controls-progress {
+    gap: 8px;
     margin-bottom: 8px;
+  }
+  
+  .progress-section {
+    gap: 6px;
+    min-width: 100px;
+  }
+  
+  .progress-bar {
+    min-width: 80px;
+  }
+  
+  #progressTime {
+    font-size: 10px;
+    min-width: 25px;
   }
   
   .footer-links {
@@ -593,6 +698,15 @@ option {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+  }
+  
+  .header-controls {
+    gap: 6px;
+  }
+  
+  .wake-lock-status-indicator {
+    font-size: 9px;
+    padding: 2px 4px;
   }
   
   .lang-btn {
@@ -617,9 +731,9 @@ option {
   }
   
   select {
-    padding: 6px 8px;
+    padding: 2px 4px;
     font-size: 11px;
-    min-width: 70px;
+    min-width: 40px;
   }
   
   /* 모바일 광고 조정 */
