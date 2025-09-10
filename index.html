@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <title>Mouse Jiggler - WebGL</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- 헤더 영역 -->
+    <div class="header">
+      <div class="title">Mouse Jiggler - 마우스 지글러</div>
+      <div class="instructions">마우스를 아래 격자 영역에 올려놓으세요.</div>
+
+      <!-- 설정 컨트롤 -->
+      <div class="controls">
+        <div class="control-group">
+          <div class="control-label">속도</div>
+          <div class="select-container">
+            <select id="speedSelect">
+              <option value="slow">느림</option>
+              <option value="normal" selected>보통</option>
+              <option value="fast">빠름</option>
+              <option value="ultrafast">초고속</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="control-group">
+          <div class="control-label">간격</div>
+          <div class="select-container">
+            <select id="intervalSelect">
+              <option value="10">10초</option>
+              <option value="30" selected>30초</option>
+              <option value="continuous">연속</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="progress-container">
+        <div class="progress-label">
+          <div class="status-indicator">
+            <div class="status-dot" id="statusDot"></div>
+            <span id="statusText">대기 중...</span>
+          </div>
+          <span id="progressTime">0:00</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-zones" id="progressZones"></div>
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- 메인 콘텐츠 -->
+    <div class="main-content">
+      <div id="webgl-container"></div>
+    </div>
+
+
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- MouseJiggler Components -->
+    <script src="js/UIController.js"></script>
+    <script src="js/GridRenderer.js"></script>
+    <script src="js/AnimationController.js"></script>
+    <script src="js/TimingManager.js"></script>
+    <script src="js/MouseJiggler.js"></script>
+
+    <script>
+      let jiggler;
+      
+      // 애플리케이션 초기화
+      // 페이지 로드 시 자동 시작
+      document.addEventListener("DOMContentLoaded", () => {
+        jiggler = new MouseJiggler();
+        jiggler.init(); // 컴포넌트 초기화
+        jiggler.start(); // 자동 시작
+      });
+      
+    </script>
+  </body>
+</html>

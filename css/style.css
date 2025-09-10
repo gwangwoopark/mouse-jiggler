@@ -1,0 +1,316 @@
+/* ====================
+   Reset & Base Styles
+   ==================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile */
+  margin: 0;
+  padding: 15px 15px 20px;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  font-family: "Arial", sans-serif;
+}
+
+/* ====================
+   Layout Components
+   ==================== */
+.header {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.main-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+/* ====================
+   Typography
+   ==================== */
+.title {
+  font-size: 20px;
+  color: #fff;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.instructions {
+  color: #ccc;
+  font-size: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 12px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  margin-bottom: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* ====================
+   WebGL Container
+   ==================== */
+#webgl-container {
+  width: 350px;
+  height: 350px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background: #fff;
+}
+
+/* ====================
+   Controls
+   ==================== */
+.controls {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.control-label {
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.select-container {
+  position: relative;
+}
+
+select {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+select:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+select:focus {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #4facfe;
+  box-shadow: 0 0 0 2px rgba(79, 172, 254, 0.2);
+}
+
+option {
+  background: #333;
+  color: #fff;
+}
+
+/* ====================
+   Progress Bar
+   ==================== */
+.progress-container {
+  width: 100%;
+  max-width: 350px;
+  margin-top: 15px;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #ccc;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+}
+
+.progress-zones {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.activity-zone {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background: rgba(76, 172, 254, 0.3);
+  border: 1px solid rgba(76, 172, 254, 0.6);
+}
+
+.time-marker {
+  position: absolute;
+  top: -18px;
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
+  white-space: nowrap;
+  transform: translateX(-50%);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  border-radius: 10px;
+  width: 0%;
+  transition: width 0.1s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.progress-fill.active {
+  background: linear-gradient(90deg, #00ff88 0%, #00cc66 100%);
+  animation: progressGlowActive 2s ease-in-out infinite;
+}
+
+.progress-fill.waiting {
+  background: linear-gradient(90deg, #888888 0%, #666666 100%);
+  animation: progressGlowWaiting 2s ease-in-out infinite;
+}
+
+/* ====================
+   Status Indicator
+   ==================== */
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ccc;
+  font-size: 11px;
+  margin-top: 10px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #666;
+}
+
+.status-dot.active {
+  background: #4facfe;
+  animation: pulse 1.5s infinite;
+}
+
+.status-dot.waiting {
+  background: #999;
+}
+
+/* ====================
+   Animations
+   ==================== */
+@keyframes progressGlowActive {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(0, 255, 136, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.8);
+  }
+}
+
+@keyframes progressGlowWaiting {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(136, 136, 136, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(136, 136, 136, 0.8);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* ====================
+   Responsive Design
+   ==================== */
+@media screen and (max-width: 768px) {
+  body {
+    padding: 10px 10px 10px;
+    padding-top: 5px;
+    justify-content: flex-start;
+  }
+  
+  .header {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .main-content {
+    margin: 10px 0;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  body {
+    padding: 8px 8px 8px;
+    padding-top: 5px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .instructions {
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+
+  #webgl-container {
+    width: 300px;
+    height: 300px;
+  }
+
+  .progress-container {
+    max-width: 300px;
+  }
+  
+  .header {
+    margin-top: 20px;
+    margin-bottom: 8px;
+  }
+}
