@@ -37,6 +37,31 @@
     <meta name="theme-color" content="#4285f4" />
     <link rel="canonical" href="https://wake.nyfi.app/" />
     
+    <!-- PWA 설정 -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Mouse Jiggler" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    
+    <!-- PWA 아이콘들 -->
+    <link rel="icon" sizes="16x16" href="/icons/icon-16x16.svg" />
+    <link rel="icon" sizes="32x32" href="/icons/icon-32x32.svg" />
+    <link rel="icon" sizes="72x72" href="/icons/icon-72x72.svg" />
+    <link rel="icon" sizes="96x96" href="/icons/icon-96x96.svg" />
+    <link rel="icon" sizes="128x128" href="/icons/icon-128x128.svg" />
+    <link rel="icon" sizes="144x144" href="/icons/icon-144x144.svg" />
+    <link rel="icon" sizes="152x152" href="/icons/icon-152x152.svg" />
+    <link rel="icon" sizes="192x192" href="/icons/icon-192x192.svg" />
+    <link rel="icon" sizes="384x384" href="/icons/icon-384x384.svg" />
+    <link rel="icon" sizes="512x512" href="/icons/icon-512x512.svg" />
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.svg" />
+    
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5CLFWEV6KM"></script>
     <script>
@@ -114,6 +139,7 @@
     <footer class="footer">
       <div class="footer-links">
         <a href="about.html" data-translate-title="aboutLink">서비스 소개</a>
+        <a href="faq.html" data-translate-title="faqLink">자주 묻는 질문</a>
         <a href="privacy-policy.html" data-translate-title="privacyLink">개인정보처리방침</a>
         <a href="terms-of-service.html" data-translate-title="termsLink">이용약관</a>
       </div>
@@ -150,6 +176,17 @@
           langBtn.addEventListener('click', () => {
             window.languageManager.switchLanguage();
           });
+        }
+        
+        // Service Worker 등록 (PWA 지원)
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('SW: Service Worker registered successfully:', registration);
+            })
+            .catch((error) => {
+              console.log('SW: Service Worker registration failed:', error);
+            });
         }
       });
       

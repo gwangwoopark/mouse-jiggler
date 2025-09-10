@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>FAQ - Mouse Jiggler</title>
+    <link rel="stylesheet" href="css/policy.css" />
+    <style>
+      .faq-item {
+        margin-bottom: 25px;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      
+      .faq-question {
+        background: #f8f9fa;
+        padding: 15px 20px;
+        cursor: pointer;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: background-color 0.3s ease;
+      }
+      
+      .faq-question:hover {
+        background: #e9ecef;
+      }
+      
+      .faq-question.active {
+        background: #4facfe;
+        color: white;
+      }
+      
+      .faq-toggle {
+        font-size: 18px;
+        transition: transform 0.3s ease;
+      }
+      
+      .faq-toggle.active {
+        transform: rotate(180deg);
+      }
+      
+      .faq-answer {
+        padding: 0 20px;
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+      
+      .faq-answer.active {
+        padding: 20px;
+        max-height: 500px;
+      }
+      
+      .faq-answer p {
+        margin: 0 0 10px 0;
+      }
+      
+      .faq-answer ul {
+        margin: 10px 0;
+        padding-left: 20px;
+      }
+      
+      .faq-answer li {
+        margin-bottom: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>자주 묻는 질문</h1>
+        <div class="language-selector">
+          <button id="langBtn" class="lang-btn" onclick="toggleLanguage()">한글</button>
+        </div>
+      </header>
+
+      <div class="content" id="content-ko" style="display: none;">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(0)">
+            <span>Mouse Jiggler가 무엇인가요?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>Mouse Jiggler는 마우스를 자동으로 움직여서 컴퓨터의 화면 절전 모드와 화면 보호기를 방지하는 무료 웹 도구입니다. 별도의 소프트웨어 설치 없이 웹 브라우저에서 바로 사용할 수 있습니다.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(1)">
+            <span>어떻게 사용하나요?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>사용법은 매우 간단합니다:</p>
+            <ul>
+              <li>웹사이트에 접속하면 자동으로 시작됩니다</li>
+              <li>마우스를 격자 영역에 올려놓으세요</li>
+              <li>속도와 간격을 원하는 대로 설정할 수 있습니다</li>
+              <li>작업이 끝나면 페이지를 닫으시면 됩니다</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(2)">
+            <span>안전한가요? 개인정보를 수집하나요?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>완전히 안전합니다. Mouse Jiggler는:</p>
+            <ul>
+              <li>어떠한 개인정보도 수집하지 않습니다</li>
+              <li>모든 처리가 사용자의 브라우저에서만 실행됩니다</li>
+              <li>회원가입이나 로그인이 필요하지 않습니다</li>
+              <li>HTTPS로 안전하게 서비스됩니다</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(3)">
+            <span>어떤 브라우저에서 사용할 수 있나요?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>대부분의 현대적인 웹 브라우저에서 사용 가능합니다:</p>
+            <ul>
+              <li><strong>완전 지원:</strong> Chrome, Microsoft Edge, Firefox, Safari</li>
+              <li><strong>부분 지원:</strong> 구형 브라우저, 일부 모바일 브라우저</li>
+              <li><strong>권장:</strong> Chrome 또는 Edge 사용 시 Wake Lock API 지원으로 더 나은 성능</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(4)">
+            <span>모바일에서도 작동하나요?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>네, 모바일에서도 사용 가능합니다. 다만 일부 제한이 있을 수 있습니다:</p>
+            <ul>
+              <li>모바일 브라우저마다 Wake Lock API 지원이 다릅니다</li>
+              <li>배터리 절약 모드가 활성화되어 있으면 효과가 제한될 수 있습니다</li>
+              <li>반응형 디자인으로 모바일에 최적화되어 있습니다</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(5)">
+            <span>작동하지 않아요. 어떻게 해야 하나요?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>다음 사항들을 확인해보세요:</p>
+            <ul>
+              <li><strong>브라우저:</strong> Chrome 또는 Edge 사용을 권장합니다</li>
+              <li><strong>HTTPS:</strong> wake.nyfi.app에서 접속하세요 (HTTP는 일부 기능 제한)</li>
+              <li><strong>권한:</strong> 브라우저에서 Wake Lock 권한을 허용하세요</li>
+              <li><strong>새로고침:</strong> 페이지를 새로고침해보세요</li>
+              <li><strong>광고 차단기:</strong> 일시적으로 비활성화해보세요</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(6)">
+            <span>연속 모드와 간격 모드의 차이는 무엇인가요?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <ul>
+              <li><strong>연속 모드:</strong> 계속해서 마우스가 움직입니다. 화면이 절대 꺼지지 않습니다</li>
+              <li><strong>10초/30초 간격:</strong> 설정된 시간마다 잠깐 움직인 후 멈춥니다. 배터리를 절약할 수 있습니다</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(7)">
+            <span>무료인가요?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>네, 완전히 무료입니다. Mouse Jiggler는 광고 수익으로 운영되며, 모든 기능을 제한 없이 사용하실 수 있습니다.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="content" id="content-en">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(0)">
+            <span>What is Mouse Jiggler?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>Mouse Jiggler is a free web tool that automatically moves your mouse to prevent your computer's screen sleep mode and screensaver. You can use it directly in your web browser without installing any software.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(1)">
+            <span>How do I use it?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>It's very simple to use:</p>
+            <ul>
+              <li>It starts automatically when you visit the website</li>
+              <li>Place your mouse over the grid area</li>
+              <li>You can adjust speed and interval settings as needed</li>
+              <li>When you're done, simply close the page</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(2)">
+            <span>Is it safe? Do you collect personal information?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>It's completely safe. Mouse Jiggler:</p>
+            <ul>
+              <li>Does not collect any personal information</li>
+              <li>All processing happens only in your browser</li>
+              <li>No registration or login required</li>
+              <li>Served securely via HTTPS</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(3)">
+            <span>Which browsers are supported?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>Works in most modern web browsers:</p>
+            <ul>
+              <li><strong>Full Support:</strong> Chrome, Microsoft Edge, Firefox, Safari</li>
+              <li><strong>Partial Support:</strong> Older browsers, some mobile browsers</li>
+              <li><strong>Recommended:</strong> Chrome or Edge for Wake Lock API support and better performance</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(4)">
+            <span>Does it work on mobile?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>Yes, it works on mobile devices, though there may be some limitations:</p>
+            <ul>
+              <li>Wake Lock API support varies by mobile browser</li>
+              <li>Battery saver mode may limit effectiveness</li>
+              <li>Responsive design optimized for mobile use</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(5)">
+            <span>It's not working. What should I do?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>Please check the following:</p>
+            <ul>
+              <li><strong>Browser:</strong> Use Chrome or Edge for best results</li>
+              <li><strong>HTTPS:</strong> Access via wake.nyfi.app (HTTP has limited functionality)</li>
+              <li><strong>Permissions:</strong> Allow Wake Lock permissions in your browser</li>
+              <li><strong>Refresh:</strong> Try refreshing the page</li>
+              <li><strong>Ad Blockers:</strong> Temporarily disable ad blockers</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(6)">
+            <span>What's the difference between continuous and interval modes?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <ul>
+              <li><strong>Continuous Mode:</strong> Mouse moves continuously. Screen never turns off</li>
+              <li><strong>10s/30s Interval:</strong> Moves briefly at set intervals then stops. Saves battery</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(7)">
+            <span>Is it free?</span>
+            <span class="faq-toggle">▼</span>
+          </div>
+          <div class="faq-answer">
+            <p>Yes, it's completely free. Mouse Jiggler is supported by advertising revenue and you can use all features without any restrictions.</p>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <a href="/" class="back-link">← Mouse Jiggler로 돌아가기 / ← Back to Mouse Jiggler</a>
+      </footer>
+    </div>
+
+    <script>
+      // URL 파라미터에서 언어 확인, 기본값은 영어
+      const urlParams = new URLSearchParams(window.location.search);
+      let currentLang = urlParams.get('lang') || 'en';
+      
+      // 지원하지 않는 언어인 경우 영어로 설정
+      if (!['ko', 'en'].includes(currentLang)) {
+        currentLang = 'en';
+      }
+      
+      // 페이지 로드 시 초기 언어 설정
+      document.addEventListener('DOMContentLoaded', () => {
+        updateDisplay();
+      });
+      
+      function toggleLanguage() {
+        currentLang = currentLang === 'ko' ? 'en' : 'ko';
+        updateDisplay();
+        
+        // URL 업데이트 (페이지 새로고침 없이)
+        const newUrl = new URL(window.location);
+        newUrl.searchParams.set('lang', currentLang);
+        window.history.replaceState({}, '', newUrl);
+      }
+      
+      function updateDisplay() {
+        const koContent = document.getElementById('content-ko');
+        const enContent = document.getElementById('content-en');
+        const langBtn = document.getElementById('langBtn');
+        
+        if (currentLang === 'en') {
+          koContent.style.display = 'none';
+          enContent.style.display = 'block';
+          langBtn.textContent = '한글';
+          document.documentElement.lang = 'en';
+          document.title = 'FAQ - Mouse Jiggler';
+        } else {
+          koContent.style.display = 'block';
+          enContent.style.display = 'none';
+          langBtn.textContent = 'EN';
+          document.documentElement.lang = 'ko';
+          document.title = '자주 묻는 질문 - Mouse Jiggler';
+        }
+      }
+      
+      function toggleFaq(index) {
+        const currentContent = currentLang === 'en' ? 'content-en' : 'content-ko';
+        const faqItems = document.querySelectorAll(`#${currentContent} .faq-item`);
+        const item = faqItems[index];
+        
+        const question = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+        const toggle = item.querySelector('.faq-toggle');
+        
+        const isActive = answer.classList.contains('active');
+        
+        if (isActive) {
+          answer.classList.remove('active');
+          question.classList.remove('active');
+          toggle.classList.remove('active');
+        } else {
+          answer.classList.add('active');
+          question.classList.add('active');
+          toggle.classList.add('active');
+        }
+      }
+    </script>
+  </body>
+</html>
