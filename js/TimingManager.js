@@ -88,7 +88,7 @@ class TimingManager {
         this.displayActivityZones();
         
         // 초기 상태 설정
-        this.mouseJiggler.updateStatus('대기 중', false);
+        this.mouseJiggler.updateStatus('waitingStatus', false);
         
         // 사이클 내 활동 시작
         this.scheduleNextActivity();
@@ -164,7 +164,7 @@ class TimingManager {
      */
     scheduleNextActivity() {
         if (!this.currentCycle || this.currentActivityIndex >= this.currentCycle.activities.length) {
-            this.mouseJiggler.updateStatus('대기 중', false);
+            this.mouseJiggler.updateStatus('waitingStatus', false);
             return;
         }
         
@@ -183,14 +183,14 @@ class TimingManager {
         // 이미 설정된 축으로 애니메이션 시작 (축 재설정 안함)
         this.mouseJiggler.animationController.animate();
         this.mouseJiggler.animationStartTime = Date.now();
-        this.mouseJiggler.updateStatus('회전 중', true);
+        this.mouseJiggler.updateStatus('movingStatus', true);
         
         // 회전 종료 예약
         this.activityTimer = setTimeout(() => {
             this.mouseJiggler.animationController.stopAnimation();
             this.mouseJiggler.animationStartTime = 0;
             
-            this.mouseJiggler.updateStatus('대기 중', false);
+            this.mouseJiggler.updateStatus('waitingStatus', false);
             
             // 더 이상 다음 활동 스케줄링 안함 (한 번만 회전)
             this.currentActivityIndex++;
@@ -222,14 +222,16 @@ class TimingManager {
             }
             
             // 현재 활동 상태 확인
-            let statusText = '대기 중';
+            let statusText = 'waitingStatus';
             let isActive = false;
             
             // 회전 중인지 확인: animationId가 있고 animationStartTime이 설정되어 있으면 회전 중
             if (this.mouseJiggler.animationId && this.mouseJiggler.animationStartTime > 0) {
                 const animElapsed = (now - this.mouseJiggler.animationStartTime) / 1000;
                 if (interval === 0) {
-                    statusText = `연속 모드 - 회전 중 (${this.currentCycle.totalDuration.toFixed(1)}초)`;
+                    const continuousMode = window.languageManager ? window.languageManager.getText('continuousMode') : '연속 모드';
+                    const movingStatus = window.languageManager ? window.languageManager.getText('movingStatus') : '회전 중';
+                    statusText = `${continuousMode} - ${movingStatus} (${this.currentCycle.totalDuration.toFixed(1)}초)`;
                 } else {
                     const currentActivity = this.currentCycle.activities[0]; // 첫 번째 활동
                     if (currentActivity && animElapsed <= currentActivity.duration) {

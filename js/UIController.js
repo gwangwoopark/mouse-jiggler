@@ -52,12 +52,15 @@ class UIController {
     /**
      * 상태 업데이트
      */
-    updateStatus(text, active = false) {
+    updateStatus(textKey, active = false) {
         const statusText = document.getElementById('statusText');
         const statusDot = document.getElementById('statusDot');
         
         if (statusText) {
-            statusText.textContent = text;
+            // 번역 키인 경우 번역된 텍스트 사용, 아닌 경우 원본 텍스트 사용
+            const translatedText = window.languageManager ? 
+                window.languageManager.getText(textKey) || textKey : textKey;
+            statusText.textContent = translatedText;
         }
         
         if (statusDot) {
@@ -68,7 +71,7 @@ class UIController {
     /**
      * 프로그레스 업데이트
      */
-    updateProgress(progress, label, timeText, isActive = false) {
+    updateProgress(progress, labelKey, timeText, isActive = false) {
         const progressFill = document.getElementById('progressFill');
         const progressLabel = document.getElementById('progressLabel');
         const progressTime = document.getElementById('progressTime');
@@ -80,7 +83,10 @@ class UIController {
         }
         
         if (progressLabel) {
-            progressLabel.textContent = label;
+            // 번역 키인 경우 번역된 텍스트 사용, 아닌 경우 원본 텍스트 사용
+            const translatedLabel = window.languageManager ? 
+                window.languageManager.getText(labelKey) || labelKey : labelKey;
+            progressLabel.textContent = translatedLabel;
         }
         
         if (progressTime) {
@@ -158,25 +164,47 @@ class UIController {
         if (!wakeLockInfo) return;
 
         let message = '';
+        let showRefreshBtn = false;
+        
+        const isKorean = window.languageManager?.getCurrentLanguage() === 'ko';
         
         switch (errorType) {
             case 'API_NOT_SUPPORTED':
-                message = '⚠️ 이 브라우저는 화면 절전 방지를 지원하지 않습니다.';
+                message = isKorean ? 
+                    '⚠️ 이 브라우저는 화면 절전 방지를 지원하지 않습니다.' :
+                    '⚠️ Screen wake lock is not supported in this browser.';
                 break;
             case 'HTTPS_REQUIRED':
-                message = '🔒 HTTPS 연결이 필요합니다. 로컬 서버나 HTTPS 사이트에서 사용하세요.';
+                message = isKorean ? 
+                    '🔒 HTTPS 연결이 필요합니다. 로컬 서버나 HTTPS 사이트에서 사용하세요.' :
+                    '🔒 HTTPS connection required. Use localhost or HTTPS site.';
+                showRefreshBtn = true;
                 break;
             case 'PERMISSION_DENIED':
-                message = '❌ 권한이 거부되었습니다. 브라우저 설정을 확인하거나 페이지를 새로고침하세요.';
+                message = isKorean ? 
+                    '❌ 권한이 거부되었습니다. 브라우저 설정을 확인하거나 페이지를 새로고침하세요.' :
+                    '❌ Permission denied. Check browser settings or refresh the page.';
+                showRefreshBtn = true;
                 break;
             case 'ABORTED':
-                message = '⏸️ Wake Lock이 중단되었습니다. 다른 앱이나 시스템 설정 때문일 수 있습니다.';
+                message = isKorean ? 
+                    '⏸️ Wake Lock이 중단되었습니다. 다른 앱이나 시스템 설정 때문일 수 있습니다.' :
+                    '⏸️ Wake Lock was aborted. May be due to other apps or system settings.';
+                showRefreshBtn = true;
                 break;
             default:
-                message = `💡 화면 절전 방지가 지원되지 않습니다. Chrome/Edge 사용을 권장합니다.`;
+                message = isKorean ? 
+                    '💡 화면 절전 방지가 지원되지 않습니다. Chrome/Edge 사용을 권장합니다.' :
+                    '💡 Screen wake lock is not supported. Chrome/Edge is recommended.';
         }
         
-        wakeLockInfo.textContent = message;
+        // 새로고침 버튼 표시/숨기기
+        const refreshBtn = document.getElementById('refreshBtn');
+        if (refreshBtn) {
+            refreshBtn.style.display = showRefreshBtn ? 'inline-block' : 'none';
+        }
+        
+        wakeLockInfo.innerHTML = message + (showRefreshBtn ? ' <button class="refresh-btn" onclick="location.reload()">🔄</button>' : '');
         wakeLockInfo.classList.add('show');
         
         // 콘솔에 상세 정보
