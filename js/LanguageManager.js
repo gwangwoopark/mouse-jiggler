@@ -3,15 +3,14 @@ class LanguageManager {
     this.currentLanguage = 'en'; // 기본 언어를 영어로 변경
     this.translations = {
       ko: {
-        title: 'Mouse Jiggler - 마우스 지글러',
-        instructions: '마우스를 아래 격자 영역에 올려놓으세요.',
+        title: 'Mouse Jiggler',
+        instructions: '마우스를 아래 구체에 올려놓고 화면 꺼짐을 방지하세요.',
         wakeLockInfo: '💡 일부 브라우저에서는 화면 절전 방지가 지원되지 않습니다. Chrome/Edge 사용을 권장합니다.',
         speed: '속도',
         interval: '간격',
         slow: '느림',
         normal: '보통',
         fast: '빠름',
-        ultrafast: '초고속',
         interval10: '10초',
         interval30: '30초',
         continuous: '연속',
@@ -30,15 +29,14 @@ class LanguageManager {
         copyright: '© 2025 Mouse Jiggler. 무료로 제공되는 서비스입니다.'
       },
       en: {
-        title: 'Mouse Jiggler - Prevent Screen Sleep',
-        instructions: 'Place your mouse over the grid area below.',
+        title: 'Mouse Jiggler',
+        instructions: 'Place your mouse over the sphere and prevent screen sleep.',
         wakeLockInfo: '💡 Screen wake lock is not supported in some browsers. Chrome/Edge is recommended.',
         speed: 'Speed',
         interval: 'Interval',
         slow: 'Slow',
         normal: 'Normal',
         fast: 'Fast',
-        ultrafast: 'Ultra Fast',
         interval10: '10 sec',
         interval30: '30 sec',
         continuous: 'Continuous',
