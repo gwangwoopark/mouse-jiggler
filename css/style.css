@@ -345,6 +345,49 @@ option {
 }
 
 /* ====================
+   AdSense 광고 영역
+   ==================== */
+.ad-container {
+  width: 100%;
+  max-width: 728px;
+  margin: 0 auto;
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ad-top {
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 15px;
+}
+
+.ad-bottom {
+  margin-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 20px;
+}
+
+/* 광고 로딩 중 플레이스홀더 */
+.adsbygoogle {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.adsbygoogle:empty::before {
+  content: "Advertisement";
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+}
+
+/* ====================
    Footer
    ==================== */
 .footer {
@@ -457,5 +500,25 @@ option {
     font-size: 11px;
     padding: 5px 10px;
     min-width: 35px;
+  }
+  
+  /* 모바일 광고 조정 */
+  .ad-container {
+    max-width: 320px;
+    padding: 8px 0;
+  }
+  
+  .ad-top {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }
+  
+  .ad-bottom {
+    margin-top: 15px;
+    padding-top: 15px;
+  }
+  
+  .adsbygoogle {
+    min-height: 50px;
   }
 }
