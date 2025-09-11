@@ -14,7 +14,7 @@ class GridRenderer {
         this.mouseJiggler.gridGroup = new THREE.Group();
         
         const sphereRadius = 50;
-        const gridDensity = { meridians: 48, parallels: 24 };
+        const gridDensity = { meridians: 96, parallels: 64 };
         
         // 체크무늬 텍스쳐 생성
         const checkerTexture = this.createGridTexture(gridDensity);
@@ -46,7 +46,7 @@ class GridRenderer {
         
         // 격자 선 설정 (검정색, 두꺼운 선)
         ctx.strokeStyle = '#000000';
-        ctx.lineWidth = 3;
+        ctx.lineWidth = 1;
         
         // Equirectangular projection 격자 그리기
         this.drawEquirectangularGrid(ctx, width, height, gridDensity);

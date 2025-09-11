@@ -1,8 +1,9 @@
 /**
- * AnimationController - 애니메이션 제어 담당 컴포넌트
- * 회전, 움직임, 타이밍 관리
+ * AnimationController - BACKUP: Yaw/Roll Rotation System
+ * 백업된 Y축 yaw 회전 + 카메라 Z축 roll 회전 시스템
+ * 날짜: 2025-09-11
  */
-class AnimationController {
+class AnimationController_YawRoll_Backup {
     constructor(mouseJiggler) {
         this.mouseJiggler = mouseJiggler;
         this.gridRenderer = new GridRenderer(mouseJiggler);
@@ -41,19 +42,77 @@ class AnimationController {
     }
     
     /**
-     * 새로운 회전축 설정 (무작위 방향 회전)
+     * Y축 회전 설정 (yaw)
      */
     setFixedDirection() {
-        // 랜덤한 3D 축 생성 (정규화된 벡터)
-        const x = (Math.random() - 0.5) * 2;
-        const y = (Math.random() - 0.5) * 2;
-        const z = (Math.random() - 0.5) * 2;
-        
-        this.mouseJiggler.rotationAxis = new THREE.Vector3(x, y, z).normalize();
-        this.mouseJiggler.rotationAngle = 0; // 회전 각도 초기화
+        // Y축 회전 설정
+        this.mouseJiggler.rotationAngle = 0;
         this.mouseJiggler.lockDirection = true;
+        this.mouseJiggler.isRolling = false;
+        
+        // 구 회전 초기화 (카메라 롤링을 위해 구는 단순하게)
+        if (this.mouseJiggler.gridSphere) {
+            this.mouseJiggler.gridSphere.rotation.set(0, 0, 0);
+        }
+        
+        // 카메라 롤 각도 초기화
+        if (!this.mouseJiggler.cameraRoll) {
+            this.mouseJiggler.cameraRoll = 0;
+        }
     }
     
+    /**
+     * 1초 동안 카메라 Z축 roll 회전 시작
+     */
+    startRollTransition() {
+        if (!this.mouseJiggler.camera) return;
+        
+        this.mouseJiggler.isRolling = true;
+        const startRoll = this.mouseJiggler.cameraRoll || 0;
+        const targetRoll = startRoll + (Math.random() * Math.PI * 2); // 랜덤 추가 회전
+        const duration = 1000; // 1초
+        const startTime = Date.now();
+        
+        const rollAnimation = () => {
+            const elapsed = Date.now() - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // 부드러운 전환 (easeInOut)
+            const easeProgress = progress < 0.5 
+                ? 2 * progress * progress 
+                : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+            
+            // 카메라 롤 각도 보간
+            const currentRoll = startRoll + (targetRoll - startRoll) * easeProgress;
+            this.mouseJiggler.cameraRoll = currentRoll;
+            
+            // 카메라 롤 적용
+            this.applyCameraRoll();
+            
+            // 렌더링
+            this.mouseJiggler.renderer.render(this.mouseJiggler.scene, this.mouseJiggler.camera);
+            
+            if (progress < 1) {
+                requestAnimationFrame(rollAnimation);
+            } else {
+                // Roll 완료
+                this.mouseJiggler.isRolling = false;
+                this.mouseJiggler.cameraRoll = targetRoll;
+            }
+        };
+        
+        rollAnimation();
+    }
+    
+    /**
+     * 카메라에 Z축 롤 회전 적용
+     */
+    applyCameraRoll() {
+        if (this.mouseJiggler.camera && this.mouseJiggler.cameraRoll !== undefined) {
+            // 카메라 Z축 롤 회전 설정
+            this.mouseJiggler.camera.rotation.z = this.mouseJiggler.cameraRoll;
+        }
+    }
     
     
     /**
@@ -103,35 +162,38 @@ class AnimationController {
     
     
     /**
-     * 축 기반 구 회전 업데이트
+     * Y축(yaw) 회전 업데이트 (구만 회전)
      */
     updateSphereRotation() {
-        if (this.mouseJiggler.gridSphere) {
-            // 회전 행렬 생성
-            const rotationMatrix = new THREE.Matrix4();
-            rotationMatrix.makeRotationAxis(this.mouseJiggler.rotationAxis, this.mouseJiggler.rotationAngle);
-            
-            // 구에 회전 적용
-            this.mouseJiggler.gridSphere.rotation.setFromRotationMatrix(rotationMatrix);
+        if (this.mouseJiggler.gridSphere && !this.mouseJiggler.isRolling) {
+            // 구는 Y축만 회전
+            this.mouseJiggler.gridSphere.rotation.set(
+                0, // X축 0
+                this.mouseJiggler.rotationAngle, // Y축 yaw 회전
+                0  // Z축 0
+            );
+        }
+        
+        // 롤링 중이 아니면 카메라 롤 적용
+        if (!this.mouseJiggler.isRolling) {
+            this.applyCameraRoll();
         }
     }
     
     /**
-     * 카메라 궁도 운동 업데이트 (구 밖에서 가까운 거리)
+     * 카메라 적도 영역 고정 - Y=0 주변만 보임
      */
     updateCameraOrbit() {
         const distance = this.mouseJiggler.cameraDistance;
         
-        // 구면 좌표계로 카메라 위치 계산
-        const x = distance * Math.cos(this.mouseJiggler.theta) * Math.cos(this.mouseJiggler.phi);
-        const y = distance * Math.sin(this.mouseJiggler.theta);
-        const z = distance * Math.cos(this.mouseJiggler.theta) * Math.sin(this.mouseJiggler.phi);
+        // 카메라 고정 위치 (적도 영역)
+        this.mouseJiggler.camera.position.set(distance, 0, 0);
         
-        // 카메라 위치 업데이트
-        this.mouseJiggler.camera.position.set(x, y, z);
-        
-        // 항상 구의 중심을 보도록 설정
+        // 구의 중심을 보도록 설정
         this.mouseJiggler.camera.lookAt(0, 0, 0);
+        
+        // 카메라 롤 적용
+        this.applyCameraRoll();
     }
 
     /**
@@ -193,5 +255,5 @@ class AnimationController {
     }
 }
 
-// 전역으로 노출
-window.AnimationController = AnimationController;
+// 백업용 - 직접 노출하지 않음
+// window.AnimationController_YawRoll_Backup = AnimationController_YawRoll_Backup;

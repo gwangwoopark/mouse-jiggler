@@ -2,4 +2,7 @@ User-agent: *
 Allow: /
 Crawl-delay: 1
 
+User-agent: Yeti
+Allow: /
+
 Sitemap: https://wake.nyfi.app/sitemap.xml
