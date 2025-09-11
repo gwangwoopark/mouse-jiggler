@@ -81,7 +81,7 @@ class TimingManager {
         this.mouseJiggler.totalInterval = this.currentCycle.totalDuration;
         this.currentActivityIndex = 0;
         
-        // 사이클 전체를 위한 회전축 설정 (한 번만)
+        // 사이클 전체를 위한 Y축 회전 설정 + 랜덤 초기 회전 (주기마다 새로운 방향)
         this.mouseJiggler.animationController.setFixedDirection();
         
         // 프로그레스 바에 활동 구간 표시
@@ -170,7 +170,7 @@ class TimingManager {
         
         const activity = this.currentCycle.activities[this.currentActivityIndex];
         
-        // 즉시 시작 (딜레이 없음)
+        // 즉시 시작 (딩레이 없음)
         if (this.mouseJiggler.isRunning) {
             this.startActivity(activity);
         }

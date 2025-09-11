@@ -11,26 +11,26 @@
       name="apple-mobile-web-app-status-bar-style"
       content="black-translucent"
     />
-    <title>Mouse Jiggler - 마우스 지글러 | 화면 절전 방지 도구</title>
+    <title>Mouse Jiggler - Free Screen Saver Prevention Tool</title>
     
     <!-- SEO 메타 태그 -->
-    <meta name="description" content="마우스 자동 움직임으로 화면 절전과 화면 보호기를 방지하는 무료 웹 도구. Mouse Jiggler, Mouse Mover로 자리 비움 방지 및 컴퓨터 활성 상태 유지." />
-    <meta name="keywords" content="마우스 지글러, mouse jiggler, mouse mover, 마우스 무버, 화면 꺼짐 방지, 자리 비움 방지, 화면 절전 방지, 화면 보호기 방지, wake app, 컴퓨터 깨우기" />
+    <meta name="description" content="Free mouse jiggler tool to prevent screen savers and keep your computer awake." />
+    <meta name="keywords" content="mouse jiggler, mouse mover, 마우스 지글러, 마우스 무버, screen saver prevention, prevent sleep mode, keep computer awake, prevent away status, wake app, automatic mouse movement, 화면 절전 방지, 화면 보호기 방지, 자리 비움 방지, 컴퓨터 깨우기" />
     <meta name="author" content="Mouse Jiggler" />
     <meta name="robots" content="index, follow" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://wake.nyfi.app/" />
-    <meta property="og:title" content="Mouse Jiggler - 마우스 지글러 | 화면 절전 방지 도구" />
-    <meta property="og:description" content="마우스 자동 움직임으로 화면 절전과 화면 보호기를 방지하는 무료 웹 도구. Mouse Jiggler, Mouse Mover로 자리 비움 방지 및 컴퓨터 활성 상태 유지." />
+    <meta property="og:title" content="Mouse Jiggler - Free Screen Saver Prevention Tool" />
+    <meta property="og:description" content="Free mouse jiggler tool to prevent screen savers and keep your computer awake." />
     <meta property="og:image" content="https://wake.nyfi.app/og-image.png" />
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://wake.nyfi.app/" />
-    <meta property="twitter:title" content="Mouse Jiggler - 마우스 지글러 | 화면 절전 방지 도구" />
-    <meta property="twitter:description" content="마우스 자동 움직임으로 화면 절전과 화면 보호기를 방지하는 무료 웹 도구. Mouse Jiggler, Mouse Mover로 자리 비움 방지 및 컴퓨터 활성 상태 유지." />
+    <meta property="twitter:title" content="Mouse Jiggler - Free Screen Saver Prevention Tool" />
+    <meta property="twitter:description" content="Free mouse jiggler tool to prevent screen savers and keep your computer awake." />
     <meta property="twitter:image" content="https://wake.nyfi.app/og-image.png" />
     
     <!-- 추가적인 SEO 태그 -->
@@ -74,6 +74,52 @@
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3719050891979097" crossorigin="anonymous"></script>
     
+    <!-- Structured Data JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Mouse Jiggler",
+      "alternateName": "Mouse Mover",
+      "description": "Free mouse jiggler tool to prevent screen savers and keep your computer awake.",
+      "url": "https://wake.nyfi.app/",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Organization", 
+        "name": "Mouse Jiggler"
+      },
+      "featureList": [
+        "Prevent screen saver activation",
+        "Keep computer awake",
+        "Automatic mouse movement",
+        "Adjustable speed and intervals",
+        "No software installation required",
+        "Works in web browser"
+      ]
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Mouse Jiggler",
+      "url": "https://wake.nyfi.app/",
+      "description": "Free mouse jiggler tool to prevent screen savers and keep your computer awake.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://wake.nyfi.app/{search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
@@ -88,6 +134,9 @@
           <p data-translate="wakeLockDialogMessage">
             화면이 꺼지지 않도록 절전 방지 기능을 활성화하시겠습니까?<br>
             마우스 지글러가 더 효과적으로 작동합니다.
+          </p>
+          <p data-translate="wakeLockBrightnessMessage" style="margin-top: 15px; color: #666; font-size: 14px;">
+            💡 최적의 효과를 위해 화면 밝기를 최대로 설정해주세요.
           </p>
         </div>
         <div class="dialog-actions">
@@ -114,7 +163,7 @@
     <!-- 헤더 영역 -->
     <div class="header">
       <div class="header-top">
-        <div class="title clickable-title" data-translate="title" onclick="location.reload()" title="클릭하여 새로고침">Mouse Jiggler</div>
+        <div class="title clickable-title" data-translate="title" onclick="location.reload()" title="Click to refresh">Mouse Jiggler</div>
         <div class="header-controls">
           <div class="wake-lock-indicator">
             <span id="wakeLockIndicator" class="wake-lock-status-indicator" data-translate="wakeLockInactive">비활성</span>
@@ -122,10 +171,10 @@
           <button id="langBtn" class="lang-btn">EN</button>
         </div>
       </div>
-      <div class="instructions" data-translate="instructions">마우스를 아래 격자 영역에 올려놓으세요.</div>
+      <div class="instructions" data-translate="instructions">Place your mouse over the grid area below.</div>
       
       <div class="wake-lock-info" id="wakeLockInfo" data-translate="wakeLockInfo" style="display: none;">
-        💡 일부 브라우저에서는 화면 절전 방지가 지원되지 않습니다. Chrome/Edge 사용을 권장합니다.
+        💡 Screen wake lock is not supported in some browsers. We recommend using Chrome/Edge.
       </div>
 
       <!-- 설정 컨트롤과 프로그레스바 통합 -->
@@ -177,13 +226,13 @@
     <!-- 푸터 -->
     <footer class="footer">
       <div class="footer-links">
-        <a href="about.html" data-translate-title="aboutLink">서비스 소개</a>
-        <a href="faq.html" data-translate-title="faqLink">자주 묻는 질문</a>
-        <a href="privacy-policy.html" data-translate-title="privacyLink">개인정보처리방침</a>
-        <a href="terms-of-service.html" data-translate-title="termsLink">이용약관</a>
+        <a href="about.html" data-translate-title="aboutLink">About</a>
+        <a href="faq.html" data-translate-title="faqLink">FAQ</a>
+        <a href="privacy-policy.html" data-translate-title="privacyLink">Privacy Policy</a>
+        <a href="terms-of-service.html" data-translate-title="termsLink">Terms of Service</a>
       </div>
       <div class="footer-copyright">
-        <span data-translate="copyright">© 2025 Mouse Jiggler. 무료로 제공되는 서비스입니다.</span>
+        <span data-translate="copyright">© 2025 Mouse Jiggler. Free service for everyone.</span>
       </div>
     </footer>
 

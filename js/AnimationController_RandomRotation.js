@@ -1,8 +1,9 @@
 /**
- * AnimationController - 애니메이션 제어 담당 컴포넌트
- * 회전, 움직임, 타이밍 관리
+ * AnimationController - BACKUP: Random Direction Rotation System
+ * 백업된 무작위 방향 3D 축 회전 시스템 (원래 마우스 지글러 방식)
+ * 날짜: 2025-09-11
  */
-class AnimationController {
+class AnimationController_RandomRotation_Backup {
     constructor(mouseJiggler) {
         this.mouseJiggler = mouseJiggler;
         this.gridRenderer = new GridRenderer(mouseJiggler);
@@ -53,7 +54,6 @@ class AnimationController {
         this.mouseJiggler.rotationAngle = 0; // 회전 각도 초기화
         this.mouseJiggler.lockDirection = true;
     }
-    
     
     
     /**
@@ -193,5 +193,5 @@ class AnimationController {
     }
 }
 
-// 전역으로 노출
-window.AnimationController = AnimationController;
+// 백업용 - 직접 노출하지 않음
+// window.AnimationController_RandomRotation_Backup = AnimationController_RandomRotation_Backup;
