@@ -149,6 +149,9 @@ class MouseJiggler {
         
         this.isRunning = true;
         
+        // 시작 시 검정 화면 숨기기
+        this.timingManager.hideBlackScreen();
+        
         this.animationController.updateSpeedSettings();
         this.timingManager.startProgressTracking();
         

@@ -180,6 +180,9 @@ class TimingManager {
      * 활동 시작 (즉시 회전 시작)
      */
     startActivity(activity) {
+        // 검정 화면 숨기기 (회전 시작)
+        this.hideBlackScreen();
+        
         // 이미 설정된 축으로 애니메이션 시작 (축 재설정 안함)
         this.mouseJiggler.animationController.animate();
         this.mouseJiggler.animationStartTime = Date.now();
@@ -191,6 +194,9 @@ class TimingManager {
             this.mouseJiggler.animationStartTime = 0;
             
             this.mouseJiggler.updateStatus('waitingStatus', false);
+            
+            // 검정 화면 보여주기 (회전 종료)
+            this.showBlackScreen();
             
             // 더 이상 다음 활동 스케줄링 안함 (한 번만 회전)
             this.currentActivityIndex++;
@@ -246,6 +252,25 @@ class TimingManager {
         }, 100);
     }
 
+    /**
+     * 검정 화면 보여주기
+     */
+    showBlackScreen() {
+        const blackScreen = document.getElementById('blackScreenOverlay');
+        if (blackScreen) {
+            blackScreen.classList.add('active');
+        }
+    }
+    
+    /**
+     * 검정 화면 숨기기
+     */
+    hideBlackScreen() {
+        const blackScreen = document.getElementById('blackScreenOverlay');
+        if (blackScreen) {
+            blackScreen.classList.remove('active');
+        }
+    }
     
     /**
      * 타이머 정리
@@ -259,6 +284,9 @@ class TimingManager {
             clearTimeout(this.activityTimer);
             this.activityTimer = null;
         }
+        
+        // 타이머 정리 시 검정 화면도 숨기기
+        this.hideBlackScreen();
     }
 }
 
